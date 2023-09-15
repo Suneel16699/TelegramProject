@@ -7,98 +7,31 @@ import {
   TextInput,
   FlatList
 } from "react-native";
+import axios from 'axios';
 
 import { useState, useContext, createContext, useEffect } from "react";
 import { mockMessageData } from "./Home";
 
-// const messagingData = mockMessageData;
+function useMyApi(url){
+  const [data, setData] = useState('');
+  useEffect(()=>{
+    const fetchData =()=> {
+          axios
+              .get(url)
+              .then((response) => {
+                setData(response.data);
+              })
+    };
+    fetchData();
+  });
 
-const messagingData = [
-  {
-    id: 1,
-    first: "Hi , hcychgc",
-    second: "Hello, hgchgcghc",
-  },
-  {
-    id: 2,
-    first: "Hi, kvjvyv",
-    second: "Hello",
-  },
-  {
-    id: 3,
-    first: "Hi, jvhgvgv",
-    second: "Hello",
-  },
-  {
-    id: 4,
-    first: "Hi",
-    second: "Hello, hgcxcxrtxcfcrycgvgh",
-  },
-  {
-    id: 5,
-    first: "Hi",
-    second: "Hello",
-  },
-  {
-    id: 6,
-    first: "Hi . sckvkdwcvhdbs cmnvxjhcvskj bsdkjhdcb",
-    second: "Hello",
-  },
-  {
-    id: 7,
-    first: "Hi, bhjcyxtrsrcgvtv",
-    second: "Hello, jvygcfrxtcfgcfc",
-  },
-  {
-    id: 8,
-    first: "Hi",
-    second: "Hello. kwcbwdjkcbhjscgiu2ednkhbhwbc hvwjfvjhwbcuwbckjb",
-  },
-  {
-    id: 9,
-    first: "Hi",
-    second: "Hello",
-  },
-  {
-    id: 10,
-    first: "Hi",
-    second: "Hello",
-  },
-  {
-    id: 11,
-    first: "Hi",
-    second: "Hello",
-  },
-  {
-    id: 12,
-    first: "Hi , sckjhbvjcsm x whefkjebcius wcvwkjcbskjbc",
-    second: "Hello",
-  },
-  {
-    id: 13,
-    first: "Hi",
-    second: "Hello",
-  },
-  {
-    id: 14,
-    first: "Hi",
-    second: "Hello",
-  },
-  {
-    id: 15,
-    first: "Hi",
-    second: "Hello",
-  },
-  {
-    id: 16,
-    first: "Hi svchbefvbwjdcbuewgbfwjbckusaoixbnwkj. hjjchwbcbwkjcbkwcv ",
-    second: "Hello. sure",
-  },
-];
+    return data;
+  }
 
 const MessagingContext = createContext();
 
 export default function ChatScreen({ route }) {
+  const messagingData = useMyApi('https://mocki.io/v1/b2b0486d-76d4-4377-a70d-7e4193949666');
   const [input, setInput] = useState("");
   const [countID, setCountID] = useState(messagingData?.length);
   const [messageData, setMessagingData] = useState(messagingData);
