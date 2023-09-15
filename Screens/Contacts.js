@@ -1,98 +1,23 @@
 import {View,Text,Image,Pressable, ScrollView} from 'react-native';
 
-const data = [
-  {
-    id: 1,
-    name: "Akhil A",
-    iconbg: "green",
-    lastseen: "last seen recently",
-  },
-  {
-    id: 2,
-    name: "Abhi M",
-    iconbg: "blue",
-    lastseen: "last seen a long time ago",
-  },
-  {
-    id: 3,
-    name: "Balu C",
-    iconbg: "grey",
-    lastseen:"last seen a week ago",
-  },
-  {
-    id: 4,
-    name: "Chakri G",
-    iconbg: "pink",
-    lastseen :'last seen a long time ago',
-  },
-  {
-    id: 5,
-    name: "Debashish N",
-    iconbg: "orange",
-    lastseen: "last seen recently",
-  },
-  {
-    id: 6,
-    name: "Hari R",
-    iconbg: "green",
-    lastseen :'last seen a long time ago',
-  },
-  {
-    id: 7,
-    name: "John D",
-    iconbg: "blue",
-    lastseen:"last seen a week ago",
-  },
-  {
-    id: 8,
-    name: "Kiran M",
-    iconbg: "grey",
-    lastseen: "last seen recently",
-  },
-  {
-    id: 9,
-    name: "Mohan K",
-    iconbg: "pink",
-    lastseen:"last seen a week ago",
-  },
-  {
-    id: 10,
-    name: "Sudhakar C",
-    iconbg: "orange",
-    lastseen :'last seen a long time ago',
-  },
-  {
-    id: 11,
-    name: "Sreeni N",
-    iconbg: "green",
-    lastseen:"last seen a week ago",
-  },
-  {
-    id: 12,
-    name: "Suneel K",
-    iconbg: "blue",
-    lastseen: "last seen recently",
-  },
-  {
-    id: 13,
-    name: "Tarun V",
-    iconbg: "grey",
-    lastseen:"last seen a week ago",
-  },
-  {
-    id: 14,
-    name: "Uday J",
-    iconbg: "pink",
-    lastseen: "last seen recently",
-  },
-  {
-    id: 15,
-    name: "Varun K",
-    iconbg: "orange",
-    lastseen :'last seen a long time ago',
-  },
-];
+import axios from 'axios';
+import { useEffect , useState} from 'react';
 
+function useMyApi(url){
+  const [data, setData] = useState('');
+  useEffect(()=>{
+    const fetchData =()=> {
+          axios
+              .get(url)
+              .then((response) => {
+                setData(response.data);
+              })
+    };
+    fetchData();
+  });
+
+    return data;
+  }
 
 function Contact(props) {
   const nam = props.items.name.split(" ");
@@ -139,10 +64,11 @@ function Contact(props) {
 }
 
 export default function Contacts(){
+  const data = useMyApi('https://mocki.io/v1/ee0cc81c-bf73-4651-bfcc-7f0ab2470314');
   return(
     <ScrollView>
       {
-        data.map((val,index)=>{
+         data.map((val,index)=>{
           return(
             <Contact key={index} items={val}/>
           );
