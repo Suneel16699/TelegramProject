@@ -10,211 +10,21 @@ import {
   Pressable,
 } from "react-native";
 
-const data = [
-  {
-    id: 1,
-    name: "Suneel K",
-    message: "Good Morning!",
-    iconbg: "green",
-    time: "12:06",
-    count: 2,
-  },
-  {
-    id: 2,
-    name: "Sreeni N",
-    message: "Hi, Good Morning!",
-    iconbg: "blue",
-    time: "12:05",
-    count: 300,
-  },
-  {
-    id: 3,
-    name: "Deb N",
-    message: "How are you?",
-    iconbg: "grey",
-    time: "12:03",
-    count: 2,
-  },
-  {
-    id: 4,
-    name: "Siva J",
-    message: "Update on Task?",
-    iconbg: "pink",
-    time: "12:00",
-    count: 2,
-  },
-  {
-    id: 5,
-    name: "Sudhakar C",
-    message: "Any Update?",
-    iconbg: "orange",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 6,
-    name: "Suneel K",
-    message: "Hi, Good Morning!",
-    iconbg: "green",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 7,
-    name: "Sreeni N",
-    message: "Hi, Good Morning!",
-    iconbg: "blue",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 8,
-    name: "Deb N",
-    message: "Hi, Good Morning!",
-    iconbg: "grey",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 9,
-    name: "Siva J",
-    message: "Hi, Good Morning!",
-    iconbg: "pink",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 10,
-    name: "Sudhakar C",
-    message: "Hi, Good Morning!",
-    iconbg: "orange",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 11,
-    name: "Suneel K",
-    message: "Hi, Good Morning!",
-    iconbg: "green",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 12,
-    name: "Sreeni N",
-    message: "Hi, Good Morning!",
-    iconbg: "blue",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 13,
-    name: "Deb N",
-    message: "Hi, Good Morning!dchvjehvchefbcvkjsdbckjebvckjecvjv",
-    iconbg: "grey",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 14,
-    name: "Siva J",
-    message: "Hi, Good Morning!",
-    iconbg: "pink",
-    time: "11:45",
-    count: 2,
-  },
-  {
-    id: 15,
-    name: "Sudhakar C",
-    message: "Hi, Good Morning!",
-    iconbg: "orange",
-    time: "11:45",
-    count: 2,
-  },
-];
+function useMyApi(url){
+  const [data, setData] = useState('');
+  useEffect(()=>{
+    const fetchData =()=> {
+          axios
+              .get(url)
+              .then((response) => {
+                setData(response.data);
+              })
+    };
+    fetchData();
+  });
 
- export const mockMessageData = [
-  {
-  id:1,
-  first:"Hi , hcychgc",
-  second:"Hello, hgchgcghc"
-},
-{
-  id:2,
-  first:"Hi, kvjvyv",
-  second:"Hello"
-},
-{
-  id:3,
-  first:"Hi, jvhgvgv",
-  second:"Hello"
-},
-{
-  id:4,
-  first:"Hi",
-  second:"Hello, hgcxcxrtxcfcrycgvgh"
-},
-{
-  id:5,
-  first:"Hi",
-  second:"Hello"
-},
-{
-  id:6,
-  first:"Hi . sckvkdwcvhdbs cmnvxjhcvskj bsdkjhdcb",
-  second:"Hello"
-},
-{
-  id:7,
-  first:"Hi, bhjcyxtrsrcgvtv",
-  second:"Hello, jvygcfrxtcfgcfc"
-},
-{
-  id:8,
-  first:"Hi",
-  second:"Hello. kwcbwdjkcbhjscgiu2ednkhbhwbc hvwjfvjhwbcuwbckjb"
-},
-{
-  id:9,
-  first:"Hi",
-  second:"Hello"
-},
-{
-  id:10,
-  first:"Hi",
-  second:"Hello"
-},
-{
-  id:11,
-  first:"Hi",
-  second:"Hello"
-},
-{
-  id:12,
-  first:"Hi , sckjhbvjcsm x whefkjebcius wcvwkjcbskjbc",
-  second:"Hello"
-},
-{
-  id:13,
-  first:"Hi",
-  second:"Hello"
-},
-{
-  id:14,
-  first:"Hi",
-  second:"Hello"
-},
-{
-  id:15,
-  first:"Hi",
-  second:"Hello"
-},
-{
-  id:16,
-  first:"Hi svchbefvbwjdcbuewgbfwjbckusaoixbnwkj. hjjchwbcbwkjcbkwcv ",
-  second:"Hello. sure"
-},
-];
+    return data;
+  }
 
 function ChatRow(props) {
   const nam = props.items.name.split(" ");
@@ -272,6 +82,7 @@ function ChatRow(props) {
 }
 
 function ChatList({navigation}){
+  const data = useMyApi('https://mocki.io/v1/b2b0486d-76d4-4377-a70d-7e4193949666');
   return(
     <View>
     <ScrollView>
